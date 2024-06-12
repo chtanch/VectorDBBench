@@ -20,7 +20,7 @@ class config:
     DROP_OLD = env.bool("DROP_OLD", True)
     USE_SHUFFLED_DATA = env.bool("USE_SHUFFLED_DATA", True)
 
-    NUM_CONCURRENCY = env.list("NUM_CONCURRENCY", "20,30", subcast=int)
+    NUM_CONCURRENCY = env.list("NUM_CONCURRENCY", "1", subcast=int)
     # NUM_CONCURRENCY = [1, 5, 10, 15, 20, 25, 30, 35]
 
     RESULTS_LOCAL_DIR = pathlib.Path(__file__).parent.joinpath("results")
