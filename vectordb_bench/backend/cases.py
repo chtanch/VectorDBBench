@@ -42,6 +42,9 @@ class CaseType(Enum):
     Performance1536D500K99P = 14
     Performance1536D5M99P = 15
 
+    PerformanceLocalGist = 16
+    PerformanceLocalOpenAI = 17
+
     Custom = 100
 
     @property
@@ -268,6 +271,24 @@ Results will show index building time, recall, and maximum QPS."""
     load_timeout: float | int = config.LOAD_TIMEOUT_1536D_5M
     optimize_timeout: float | int | None = config.OPTIMIZE_TIMEOUT_1536D_5M
 
+class PerformanceLocalGist(PerformanceCase):
+    case_id: CaseType = CaseType.PerformanceLocalGist
+    dataset: DatasetManager = Dataset.LGIST.manager(1_000_000)
+    name: str = "Search Performance Test (Local GIST 1M Dataset, 960 Dim)"
+    description: str = """This case tests the search performance of a vector database with a medium dataset (<b>GIST 1M vectors</b>, 960 dimensions) at varying parallel levels.
+Results will show index building time, recall, and maximum QPS."""
+    load_timeout: float | int = config.LOAD_TIMEOUT_768D_1M
+    optimize_timeout: float | int | None = config.OPTIMIZE_TIMEOUT_768D_1M
+
+class PerformanceLocalOpenAI(PerformanceCase):
+    case_id: CaseType = CaseType.PerformanceLocalOpenAI
+    dataset: DatasetManager = Dataset.LOPENAI.manager(100_000)
+    name: str = "Search Performance Test (Local OpenAI 100K Dataset, 1536 Dim)"
+    description: str = """This case tests the search performance of a vector database with a small dataset (<b>OPENAI 100K vectors</b>, 1536 dimensions) at varying parallel levels.
+Results will show index building time, recall, and maximum QPS."""
+    load_timeout: float | int = config.LOAD_TIMEOUT_768D_1M
+    optimize_timeout: float | int | None = config.OPTIMIZE_TIMEOUT_768D_1M
+
 
 type2case = {
     CaseType.CapacityDim960: CapacityDim960,
@@ -291,4 +312,6 @@ type2case = {
     CaseType.Performance1536D500K99P: Performance1536D500K99P,
     CaseType.Performance1536D5M99P: Performance1536D5M99P,
 
+    CaseType.PerformanceLocalGist: PerformanceLocalGist,
+    CaseType.PerformanceLocalOpenAI: PerformanceLocalOpenAI,
 }

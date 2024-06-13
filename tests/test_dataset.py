@@ -8,6 +8,18 @@ from vectordb_bench.backend.data_source import DatasetSource
 log = logging.getLogger("vectordb_bench")
 
 class TestDataSet:
+    def test_iter_lgist(self):
+        cohere_10m = Dataset.LGIST.manager(1_000_000)
+        cohere_10m.prepare()
+
+        import time
+        before = time.time()
+        for i in cohere_10m:
+            log.debug(i.head(1))
+
+        dur_iter = time.time() - before
+        log.warning(f"iter through cohere_10m cost={dur_iter/60}min")
+
     def test_iter_dataset(self):
         for ds in Dataset:
             log.info(ds)

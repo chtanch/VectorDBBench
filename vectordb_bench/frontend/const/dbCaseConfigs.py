@@ -34,6 +34,9 @@ CASE_LIST_WITH_DIVIDER = [
     DIVIDER,
     CaseType.CapacityDim960,
     CaseType.CapacityDim128,
+    DIVIDER,
+    CaseType.PerformanceLocalGist,
+    CaseType.PerformanceLocalOpenAI,
 ]
 
 CASE_LIST = [item for item in CASE_LIST_WITH_DIVIDER if isinstance(item, CaseType)]

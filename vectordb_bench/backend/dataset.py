@@ -120,6 +120,26 @@ class OpenAI(BaseDataset):
         5_000_000: SizeLabel(5_000_000, "LARGE", 10),
     }
 
+class LGIST(BaseDataset):
+    name: str = "LGIST"
+    dim: int = 960
+    metric_type: MetricType = MetricType.L2
+    use_shuffled: bool = False
+    with_gt: bool = True,
+    _size_label: dict = {
+        1_000_000: SizeLabel(1_000_000, "MEDIUM", 1),
+    }
+
+class LOpenAI(BaseDataset):
+    name: str = "LOpenAI"
+    dim: int = 1536
+    metric_type: MetricType = MetricType.COSINE
+    use_shuffled: bool = False
+    with_gt: bool = True,
+    _size_label: dict = {
+        100_000: SizeLabel(100_000, "SMALL", 1),
+    }
+
 
 class DatasetManager(BaseModel):
     """Download dataset if not in the local directory. Provide data for cases.
@@ -262,6 +282,8 @@ class Dataset(Enum):
     GLOVE = Glove
     SIFT = SIFT
     OPENAI = OpenAI
+    LGIST = LGIST
+    LOPENAI = LOpenAI
 
     def get(self, size: int) -> BaseDataset:
         return self.value(size=size)
