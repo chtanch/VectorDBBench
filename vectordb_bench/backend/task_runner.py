@@ -217,16 +217,19 @@ class CaseRunner(BaseModel):
 
         gt_df = self.ca.dataset.gt_data
 
+        k = 10  # k(int): search topk
         self.serial_search_runner = SerialSearchRunner(
             db=self.db,
             test_data=self.test_emb,
             ground_truth=gt_df,
+            k=k,
             filters=self.ca.filters,
         )
 
         self.search_runner =  MultiProcessingSearchRunner(
             db=self.db,
             test_data=self.test_emb,
+            k=k,
             filters=self.ca.filters,
         )
 

@@ -218,7 +218,7 @@ CaseConfigParamInput_EF_Milvus = CaseConfigInput(
     label=CaseConfigParamType.EF,
     inputType=InputType.Number,
     inputConfig={
-        "min": 100,
+        "min": 10,  # must be larger or equals k (number of retrieved vectors)
         "max": MAX_STREAMLIT_INT,
         "value": 100,
     },
